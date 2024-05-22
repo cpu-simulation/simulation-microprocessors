@@ -1,5 +1,5 @@
-from components.data_handling.mux import Mux
-from components.utilities.reversed_index_list import ReversedIndexList
+from components.mux import Mux
+from utils.reversed_index_list import ReversedIndexList
 
 
 class Shift:

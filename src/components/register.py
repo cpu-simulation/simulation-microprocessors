@@ -1,4 +1,4 @@
-from components.utilities.reversed_index_list import ReversedIndexList
+from utils.reversed_index_list import ReversedIndexList
 
 
 class Register:

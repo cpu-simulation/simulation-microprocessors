@@ -1,5 +1,5 @@
-from components.utilities.reversed_index_list import ReversedIndexList
 import math
+from utils.reversed_index_list import ReversedIndexList
 
 
 class Mux:

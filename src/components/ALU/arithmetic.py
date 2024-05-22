@@ -1,6 +1,6 @@
-from components.arithmetic.adder import FullAdder
-from components.data_handling.mux import Mux
-from components.utilities.reversed_index_list import ReversedIndexList
+from components.ALU.adder import FullAdder
+from components.mux import Mux
+from utils.reversed_index_list import ReversedIndexList
 
 
 class Arithmetic:
