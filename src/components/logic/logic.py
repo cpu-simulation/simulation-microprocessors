@@ -1,5 +1,5 @@
-from components.core_utils.mux import Mux
-from components.types.reversed_index_list import ReversedIndexList
+from components.data_handling.mux import Mux
+from components.utilities.reversed_index_list import ReversedIndexList
 
 
 class Logic:
