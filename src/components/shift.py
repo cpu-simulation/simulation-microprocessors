@@ -37,12 +37,12 @@ class Shift:
     @property
     def shr(self):
         self.s = [0]
-        return shift.out
+        return self.out
 
     @property
     def shl(self):
         self.s = [1]
-        return shift.out
+        return self.out
 
     @property
     def out(self):
