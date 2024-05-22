@@ -6,7 +6,7 @@ from reversed_index_list import ReversedIndexList
 class Arithmetic:
     def __init__(self, size: int) -> None:
         self.size = size
-        self.mux = [Mux(4) for _ in range(size)]
+        self.mux = [Mux(size) for _ in range(size)]
         self.adders = [FullAdder() for _ in range(size)]
         self._A: ReversedIndexList
         self._B: ReversedIndexList
