@@ -1,4 +1,4 @@
-from components.core_utils.mux import Mux
+from components.basic_utils.mux import Mux
 from components.types.reversed_index_list import ReversedIndexList
 
 
