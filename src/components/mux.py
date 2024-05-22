@@ -12,6 +12,6 @@ class Mux:
     @property
     def out(self):
         v = 0
-        for i in range(len(self.s)):
+        for i in range(self.pins):
             v += self.s[i] * (2**i)
         return self.i[v]
