@@ -1,5 +1,5 @@
-from mux import Mux
-from reversed_index_list import ReversedIndexList
+from components.core_utils.mux import Mux
+from components.types.reversed_index_list import ReversedIndexList
 
 
 class Shift:
@@ -54,7 +54,7 @@ class Shift:
 
 
 # shift = Shift(4)
-# shift.i = 1
+# shift.i = 0
 # shift.A = ReversedIndexList([0, 1, 1, 0])
 # shift.s = [0]  # zero for Right, one for left
 # print(shift.out)

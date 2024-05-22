@@ -1,6 +1,6 @@
-from mux import Mux
-from reversed_index_list import ReversedIndexList
-from register import Register
+from components.core_utils.mux import Mux
+from components.types.reversed_index_list import ReversedIndexList
+from components.storage.register import Register
 
 
 class Bus:

@@ -1,4 +1,4 @@
-from reversed_index_list import ReversedIndexList
+from components.types.reversed_index_list import ReversedIndexList
 import math
 
 
