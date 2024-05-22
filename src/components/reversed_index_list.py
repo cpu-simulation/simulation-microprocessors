@@ -1,10 +1,13 @@
 class ReversedIndexList(list):
-    def __init__(self, hex_number: hex = None):
-        if hex_number is None:
-            hex_number = list()
-
-        bits = list(bin(hex_number)[2:])
-        super().__init__(int(bit) for bit in bits)
+    def __init__(self, number=[], reverse=False):
+        if isinstance(number, list):
+            if reverse:
+                super().__init__(reversed(number))
+            else:
+                super().__init__(number)
+        else:
+            bits = list(bin(number)[2:])
+            super().__init__(int(bit) for bit in bits)
 
     def __getitem__(self, index):
         return super().__getitem__(-(index + 1))

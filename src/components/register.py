@@ -2,7 +2,7 @@ from reversed_index_list import ReversedIndexList
 
 
 class Register:
-    def __init__(self, size: int, bus: Bus):
+    def __init__(self, size: int, bus):
         self.size = size
         self.bus = bus
         self.bits: ReversedIndexList[int]
