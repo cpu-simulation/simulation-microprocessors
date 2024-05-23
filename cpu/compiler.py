@@ -57,13 +57,13 @@ class Compiler:
         return instructions
 
 
-c = Compiler()
-instructions_str = """
-    0 ADD 45A
-    CLA
-    0 LDA 234
-    1 BSA 135
-    SZA
-    CME
-"""
-print(c.compile(instructions_str))
+# c = Compiler()
+# instructions_str = """
+#     0 ADD 45A
+#     CLA
+#     0 LDA 234
+#     1 BSA 135
+#     SZA
+#     CME
+# """
+# print(c.compile(instructions_str))
