@@ -8,6 +8,10 @@ class Register:
         self.bits: ReversedIndexList[int]
         self.clr()
 
+    @property
+    def out(self):
+        return self.bits
+
     def clr(self):
         self.bits = [0] * self.size
 

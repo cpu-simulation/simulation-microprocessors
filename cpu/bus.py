@@ -12,8 +12,8 @@ class Bus:
 
     def update(self):
         for i in range(len(self.elements)):
-            for j in range(len(self.elements[i].bits)):
-                self.mux[j].i[i] = self.elements[i].bits[j]
+            for j in range(len(self.elements[i].out)):
+                self.mux[j].i[i] = self.elements[i].out[j]
 
     def add(self, *elements):
         for element in elements:
