@@ -1,26 +1,23 @@
 from cpu.components.mux import Mux
-from cpu.components.register import Register
 from cpu.utils.reversed_index_list import ReversedIndexList
 
 
 class Bus:
-    def __init__(self, elements=[], size=4) -> None:
+    def __init__(self, size=4) -> None:
         self.size = size
-        a = Register(4, self)
-        b = Register(4, self)
-        c = Register(4, self)
-        a.write([1, 0, 0, 1])
-        b.write([0, 1, 1, 0])
-        c.write([1, 1, 0, 0])
-        self.elements = [a, b, c]
+        self.elements = []
         self.mux = [Mux(size) for _ in range(size)]
+        self._s: ReversedIndexList
         self.s = ReversedIndexList([0] * self.mux[0].pins)
-        self.prepare()
 
-    def prepare(self):
+    def update(self):
         for i in range(len(self.elements)):
             for j in range(len(self.elements[i].bits)):
                 self.mux[j].i[i] = self.elements[i].bits[j]
+
+    def add(self, *elements):
+        for element in elements:
+            self.elements.append(element)
 
     @property
     def s(self):
@@ -34,9 +31,21 @@ class Bus:
 
     @property
     def out(self):
+        self.update()
         return ReversedIndexList([mux.out for mux in self.mux], True)
 
 
-# b = Bus()
-# b.s = ReversedIndexList([1, 1])
-# print(b.out)
+# from cpu.components.register import Register
+
+# bus = Bus()
+# b = Register(4, bus)
+# c = Register(4, bus)
+# c.write([1, 1, 0, 0])
+# b.write([0, 0, 1, 0])
+# bus.add(c, b)
+# bus.s = ReversedIndexList([0, 0])
+# c.write([1, 0, 1, 1])
+# b.load()
+# b.inr()
+# bus.s = ReversedIndexList([0, 1])
+# print(bus.out)

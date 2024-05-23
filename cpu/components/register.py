@@ -12,15 +12,15 @@ class Register:
         self.bits = [0] * self.size
 
     def load(self):
-        # Bus function
         for i in range(self.size):
-            self.bits[i] = self.bus[i]
+            self.bits[i] = self.bus.out[i]
 
     def inr(self):
         carry = 1
         for i in range(self.size):
+            b = self.bits[i]
             self.bits[i] ^= carry
-            carry &= self.bits[i]
+            carry &= b
 
     def write(self, data: list[int]):
         # Explicit writing on register
@@ -29,9 +29,7 @@ class Register:
         if self.size < data_length:
             raise OverflowError
 
-        for i in range(data_length):
-            self.bits[i] = reversed_data[i]
-
+        self.bits = reversed_data
 
     def read(self):
         # Explicit reading from register
