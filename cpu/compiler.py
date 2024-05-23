@@ -20,7 +20,7 @@ class CompileError(Exception):
 class Compiler:
     def __init__(self) -> None:
         self.storage = storage_lookup_dict
-        self.resgister = register_lookup_dict
+        self.register = register_lookup_dict
         self.io = io_lookup_dict
         self.i = {"0": 0x0000, "1": 0x8000}
 
@@ -30,7 +30,7 @@ class Compiler:
         for index, line in enumerate(lines):
             line = line.split(" ")
             if len(line) == 1:
-                instruction = self.resgister.get(line[0], None)
+                instruction = self.register.get(line[0], None)
                 instruction = (
                     self.io.get(line[0], None) if instruction is None else instruction
                 )
