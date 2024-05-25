@@ -3,7 +3,7 @@ from cpu.utils.reversed_index_list import ReversedIndexList
 
 
 class Bus:
-    def __init__(self, size=4) -> None:
+    def __init__(self, size=16) -> None:
         self.size = size
         self.elements = []
         self.mux = [Mux(size) for _ in range(size)]
