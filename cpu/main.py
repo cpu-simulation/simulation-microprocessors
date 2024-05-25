@@ -1,5 +1,7 @@
 from cpu.bus import Bus
 from cpu.components.register import Register 
+from cpu.memory import Memory
+from cpu.ALU import ALU
 class CPU:
     def __init__(self):
         # Bus
@@ -18,10 +20,16 @@ class CPU:
 
         bus.add(AR, PC, DR, AC, IR, TR)
 
-        # CU
         # Memory
+        memory = Memory(bus=bus, AR=AR)
+
         # ALU
+        alu = ALU()
+
         # Flag?! Flags will be properties of CPU class
+        
+
+        # CU
         pass 
 
     def compile(self):
