@@ -2,6 +2,7 @@ from cpu.bus import Bus
 from cpu.components.register import Register 
 from cpu.memory import Memory
 from cpu.ALU import ALU
+from cpu.components.flag import Flags
 class CPU:
     def __init__(self):
         # Bus
@@ -27,6 +28,8 @@ class CPU:
         alu = ALU()
 
         # Flag?! Flags will be properties of CPU class
+        
+        flags = Flags()
         
 
         # CU
