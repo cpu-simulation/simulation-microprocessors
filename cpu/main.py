@@ -18,17 +18,15 @@ class CPU:
         INPR = Register(size=8, bus=bus)
         OUTR = Register(size=8, bus=bus)
         
-
-        bus.add(AR, PC, DR, AC, IR, TR)
-
         # Memory
         memory = Memory(bus=bus, AR=AR)
+
+        bus.add(AR, PC, DR, AC, IR, TR, memory)
 
         # ALU
         alu = ALU()
 
         # Flag?! Flags will be properties of CPU class
-        
         flags = Flags()
         
 
