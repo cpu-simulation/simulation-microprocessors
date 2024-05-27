@@ -10,17 +10,20 @@ class Memory:
         self.AR = AR
         self.bus = bus
 
-    def read(self):
+    @property
+    def out(self):
         index = sum([self.AR.bits[i] * (2**i) for i in range(len(self.AR.bits))])
         return self.cells[index].bits
 
-    def write(self):
+    def load(self):
         index = sum([self.AR.bits[i] * (2**i) for i in range(len(self.AR.bits))])
         self.cells[index].bits = self.bus.out
 
-    @property
-    def out(self):
-        return self.read()
+    def write(self, data: list[int], address: int):
+        self.cells[address].bits = data
+
+    def read(self, address):
+        return self.cells[address].bits
 
 
 class Cell:

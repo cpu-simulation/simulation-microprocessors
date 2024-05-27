@@ -1,5 +1,5 @@
 class ReversedIndexList(list):
-    def __init__(self, number=[], reverse=False):
+    def __init__(self, number=[], reverse=False, size=None):
         if isinstance(number, list):
             if reverse:
                 super().__init__(reversed(number))
@@ -7,6 +7,7 @@ class ReversedIndexList(list):
                 super().__init__(number)
         else:
             bits = list(bin(number)[2:])
+            bits = [0] * (0 if size is None and len(bits) >= size else size - len(bits)) + bits
             super().__init__(int(bit) for bit in bits)
 
     def __getitem__(self, index):
