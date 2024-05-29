@@ -15,15 +15,23 @@ class Memory:
         index = sum([self.AR.bits[i] * (2**i) for i in range(len(self.AR.bits))])
         return self.cells[index].bits
 
-    def load(self):
-        index = sum([self.AR.bits[i] * (2**i) for i in range(len(self.AR.bits))])
-        self.cells[index].bits = self.bus.out
+    def load(self, condition=True):
+        if bool(condition):
+            index = sum([self.AR.bits[i] * (2**i) for i in range(len(self.AR.bits))])
+            self.cells[index].bits = self.bus.out
 
-    def write(self, data: list[int], address: int):
+    def write(self, data: ReversedIndexList[int], address: int):
         self.cells[address].bits = data
 
     def read(self, address):
         return self.cells[address].bits
+
+    def print(self):
+        for i in range(len(self.cells)):
+            cell = self.cells[i]
+            v = sum([cell.bits[j] * (2**j) for j in range(self.cell_size)])
+            if sum(cell.bits) != 0:
+                print(hex(i), hex(v))
 
 
 class Cell:

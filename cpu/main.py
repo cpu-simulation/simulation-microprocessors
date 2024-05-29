@@ -22,7 +22,7 @@ class CPU:
 
         PC = Register(size=12, bus=bus)
         DR = Register(size=16, bus=bus)
-        IR = Register(size=16, bus=bus)
+        IR = Register(size=16, bus=bus, out_range=(0, 12))
         TR = Register(size=16, bus=bus)
         INPR = Register(size=8, bus=bus)
         OUTR = Register(size=8, bus=bus)

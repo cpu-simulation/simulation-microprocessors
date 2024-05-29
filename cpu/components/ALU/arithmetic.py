@@ -6,12 +6,11 @@ from cpu.utils.reversed_index_list import ReversedIndexList
 class Arithmetic:
     def __init__(self, size: int) -> None:
         self.size = size
-        self.mux = [Mux(size) for _ in range(size)]
+        self.mux = [Mux(4) for _ in range(size)]
         self.adders = [FullAdder() for _ in range(size)]
         self._A: ReversedIndexList
         self._B: ReversedIndexList
-        self._s = ReversedIndexList([0] * self.mux[0].pins)
-
+        self._s = ReversedIndexList([0] * 2)
         self.A = ReversedIndexList([0] * size)
         self.B = ReversedIndexList([0] * size)
         self.c = 0
@@ -57,7 +56,7 @@ class Arithmetic:
         self.adders[0].c = self.c
         for i in range(1, self.size):
             self.adders[i].c = self.adders[i - 1].carry
-        return ReversedIndexList([adder.sum for adder in self.adders], True)
+        return ReversedIndexList([adder.sum for adder in self.adders])
 
     @property
     def carry(self):
