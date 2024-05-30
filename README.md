@@ -1,2 +1,2 @@
-# simulation-microcontroller
-simulation team: MicroController
+# simulation-microprocessors
+simulation team: MicroProcessors

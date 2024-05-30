@@ -84,45 +84,32 @@ class ControlUnit:
 
             self.bus.s = self.encoder.out
 
-            self.alu.add(D[1] & T[5])
-
             self.AR.load((1 - R) & T[0])
             self.IR.load(1 - R & T[1])
             self.PC.inr(1 - R & T[1])
             self.DR.load((D[0] | D[1] | D[2] | D[6]) & T[4])
             self.AC.load(D[1] & T[5])
-            
 
-            # decode - T[2]
-            # print(self.DR.out)
-            # print(self.AC.out)
-
-            # self.encoder.i[1] = D[4] & T[4] | D[5] & T[5]
-            # self.encoder.i[7] = not D[7] & I & T[3] | (D[0] | D[1] | D[2] | D[6]) & T[4]
-
-            # Data Register
+            # # Data Register
             # self.encoder.i[BC.DR] = D[2] & T[5] | D[6] & T[6]
-            # self.DR.load(bool((D[0] | D[1] | D[2] | D[6]) & T[4]))
-            # self.DR.inr(bool(D[6] & T[5]))
+            # self.DR.load((D[0] | D[1] | D[2] | D[6]) & T[4])
+            # self.DR.inr(D[6] & T[5])
             # self.bus.s = self.encoder.out
 
             # # Accumulator
-            # self.encoder.i[4] = D[3] & T[4]
+            # self.encoder.i[BC.AC] = D[3] & T[4]
             # self.AC.load(
-            #     bool((D[0] | D[1] | D[2]) & T[5] | (B[9] | B[6] | B[7]) & r | p & B[11])
+            #     (D[0] | D[1] | D[2]) & T[5] | (B[9] | B[6] | B[7]) & r | p & B[11]
             # )
-            # self.AC.inr(bool(r & B[5]))
-            # self.AC.clr(bool(r & B[11]))
+            # self.AC.inr(r & B[5])
+            # self.AC.clr(r & B[11])
 
             # # Instruction Register
-            # self.encoder.i[5] = not R & T[2]
+            # self.encoder.i[BC.IR] = (1-R) & T[2]
+            # self.IR.load(1 - R & T[1])
 
             # # Memory
-            # self.encoder.i[7] = not D[7] & I & T[3] | (D[0] | D[1] | D[2] | D[6]) & T[4]
             # self.memory.load(bool((D[3] | D[5]) & T[4] | D[6] & T[6]))
-
-        # if not sum(memory[AR]):  # memory[AR] was all zeros
-        #     return 0  # Operation exit with code 0
 
 
 bus = Bus()
@@ -175,4 +162,3 @@ memory.write(ReversedIndexList(190, size=16), 52)
 memory.print()
 
 CU.run()
-# print(DR.out)
