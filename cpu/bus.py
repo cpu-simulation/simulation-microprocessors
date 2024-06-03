@@ -16,7 +16,7 @@ class Bus:
             if self.elements[i] is None:
                 continue
             out = self.elements[i].out
-            for j in range(len(out) - 1, -1, -1):
+            for j in range(0, len(out)):
                 m -= 1
                 self.mux[m].i[i] = out[j]
 
@@ -48,11 +48,10 @@ class Bus:
 # c.write([1, 1, 0, 0])
 # b.write([0, 0, 1, 0])
 # bus.add(c, b)
-# # bus.s = ReversedIndexList([0, 0])
+# # bus.s = ReversedIndexList([0, 0, 0])
 # # c.write([1, 0, 1, 1])
 # # b.load()
 # # b.inr()
-# bus.s = ReversedIndexList([0, 0, 0, 0])
+# # bus.s = ReversedIndexList([0, 0, 0])
 # bus.update()
-# print(bus.mux[0].i[0], bus.mux[0].i[1], bus.mux[0].i[2], bus.mux[0].i[3])
 # print(bus.out)
