@@ -1,7 +1,7 @@
 from cpu.bus import Bus
 from cpu.components.register import Register
 from cpu.memory import Memory
-from cpu.utils.reversed_index_list import ReversedIndexList
+from cpu.utils.binary import dec_to_binlist
 from cpu.components.sc import SequenceCounter
 from cpu.components.decoder import Decoder
 from cpu.components.encoder import Encoder
@@ -125,7 +125,7 @@ alu.AC = AC
 memory = Memory(bus=bus, AR=AR)
 bus.add(None, AR, PC, DR, AC, IR, TR, memory)
 
-PC.write(1)
+PC.write(dec_to_binlist(1, 12))
 CU = ControlUnit(
     bus=bus,
     memory=memory,
@@ -153,12 +153,12 @@ instructions = [
 ]
 
 for i, instruction in enumerate(instructions):
-    memory.write(ReversedIndexList(instruction), i + 1)
+    memory.write(instruction, i + 1)
 
-memory.write(ReversedIndexList(20, size=16), 50)
-memory.write(ReversedIndexList(75, size=16), 51)
-memory.write(ReversedIndexList(190, size=16), 52)
+memory.write(dec_to_binlist(20, size=16), 50)
+memory.write(dec_to_binlist(75, size=16), 51)
+memory.write(dec_to_binlist(190, size=16), 52)
 
 memory.print()
 
-CU.run()
+# CU.run()
