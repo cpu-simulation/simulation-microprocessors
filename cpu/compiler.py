@@ -4,7 +4,7 @@ from cpu.utils.lookup_dicts import (
     register_lookup_dict,
 )
 
-from cpu.utils.reversed_index_list import ReversedIndexList
+from cpu.utils.binary import dec_to_binlist
 
 
 class CompileError(Exception):
@@ -38,7 +38,8 @@ class Compiler:
                 )
                 if instruction is None:
                     raise CompileError("syntax", index + 1)
-                instructions.append(ReversedIndexList(instruction, size=16))
+                print(instruction)
+                instructions.append(dec_to_binlist(instruction, size=16))
             elif len(line) == 3:
                 i = self.i.get(line[0], None)
                 if i is None:
@@ -53,7 +54,7 @@ class Compiler:
                     raise CompileError(
                         "value", index + 1, "invalid value for address"
                     ) from None
-                instructions.append(ReversedIndexList(i + opcode + address, size=16))
+                instructions.append(dec_to_binlist(i + opcode + address, size=16))
             else:
                 raise CompileError("syntax", index + 1)
         return instructions
@@ -68,4 +69,5 @@ class Compiler:
 #     SZA
 #     CME
 # """
-# print(c.compile(instructions_str))
+# for inst in c.compile(instructions_str):
+#     print(inst)

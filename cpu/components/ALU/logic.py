@@ -1,5 +1,4 @@
 from cpu.components.mux import Mux
-from cpu.utils.reversed_index_list import ReversedIndexList
 
 
 class Logic:
@@ -7,16 +6,16 @@ class Logic:
         self.size = size
         self.mux = [Mux(4) for _ in range(self.size)]
 
-        self._s = ReversedIndexList([0] * self.mux[0].pins)
-        self.A = ReversedIndexList([0] * size)
-        self.B = ReversedIndexList([0] * size)
+        self._s = [0] * self.mux[0].pins
+        self.A = [0] * size
+        self.B = [0] * size
 
     @property
     def s(self):
         return self._s
 
     @s.setter
-    def s(self, value: ReversedIndexList):
+    def s(self, value: list[int]):
         self._s = value
         for i in range(self.size):
             self.mux[i].s = value
@@ -28,11 +27,11 @@ class Logic:
             self.mux[i].i[1] = self.A[i] | self.B[i]
             self.mux[i].i[2] = self.A[i] ^ self.B[i]
             self.mux[i].i[3] = 1 - self.A[i]
-        return ReversedIndexList([self.mux[i].out for i in range(self.size)], reverse=True)
+        return [self.mux[i].out for i in range(self.size)]
 
 
 # l = Logic(4)
-# l.A = ReversedIndexList([1, 0, 1, 0])
-# l.B = ReversedIndexList([0, 1, 1, 0])
-# l.s = ReversedIndexList([1, 1])
+# l.A = [1, 0, 1, 0]
+# l.B = [0, 1, 1, 0]
+# l.s = [0, 0]
 # print(l.out)
