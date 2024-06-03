@@ -46,6 +46,7 @@ class Arithmetic:
 
     @s.setter
     def s(self, value: ReversedIndexList[int]):
+        self._s = value
         for i in range(self.size):
             self.mux[i].s = value
         for i in range(self.size):
@@ -56,7 +57,7 @@ class Arithmetic:
         self.adders[0].c = self.c
         for i in range(1, self.size):
             self.adders[i].c = self.adders[i - 1].carry
-        return ReversedIndexList([adder.sum for adder in self.adders])
+        return ReversedIndexList([adder.sum for adder in self.adders], reverse=True)
 
     @property
     def carry(self):
@@ -65,10 +66,9 @@ class Arithmetic:
 
 
 # a = Arithmetic(4)
-# a.A = ReversedIndexList([0, 0, 1, 0])
-# a.B = ReversedIndexList([0, 1, 1, 1])
-# a.s = ReversedIndexList([0, 1])
-# a.c = 1
-# o = a.out
+# a.A = ReversedIndexList([0, 1, 1, 1])
+# a.B = ReversedIndexList([0, 0, 1, 1])
+# a.s = ReversedIndexList([1, 0])
+# a.c = 0
 
 # print(a.out)

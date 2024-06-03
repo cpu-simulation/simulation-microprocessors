@@ -17,6 +17,7 @@ class Logic:
 
     @s.setter
     def s(self, value: ReversedIndexList):
+        self._s = value
         for i in range(self.size):
             self.mux[i].s = value
 
@@ -27,7 +28,7 @@ class Logic:
             self.mux[i].i[1] = self.A[i] | self.B[i]
             self.mux[i].i[2] = self.A[i] ^ self.B[i]
             self.mux[i].i[3] = 1 - self.A[i]
-        return ReversedIndexList([self.mux[i].out for i in range(self.size)], True)
+        return ReversedIndexList([self.mux[i].out for i in range(self.size)], reverse=True)
 
 
 # l = Logic(4)

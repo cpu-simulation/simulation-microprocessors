@@ -14,7 +14,7 @@ class Register:
     @property
     def out(self):
         r = self.out_range
-        return self.bits[r[0] : r[1]]
+        return ReversedIndexList(self.bits[r[0] : r[1]])
 
     def clr(self, condition=True):
         if bool(condition):
@@ -36,8 +36,7 @@ class Register:
     def write(self, data: list[int]):
         # Explicit writing on register
         reversed_data = ReversedIndexList(data, size=self.size)
-        data_length = len(reversed_data)
-        if self.size < data_length:
+        if self.size < len(reversed_data):
             raise OverflowError
 
         self.bits = reversed_data

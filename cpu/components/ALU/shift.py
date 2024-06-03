@@ -22,6 +22,7 @@ class Shift:
 
     @s.setter
     def s(self, value: ReversedIndexList[int]):
+        self._s = value
         for i in range(self.size):
             self.mux[i].s = value
 
@@ -50,7 +51,7 @@ class Shift:
 
     @property
     def out(self):
-        return ReversedIndexList([mux.out for mux in self.mux], True)
+        return ReversedIndexList([mux.out for mux in self.mux], reverse=True)
 
 
 # shift = Shift(4)
