@@ -1,17 +1,15 @@
-import math
+from math import ceil, log2
 from cpu.utils.reversed_index_list import ReversedIndexList
 
 
 class Mux:
     def __init__(self, size: int) -> None:
-        self.pins = int(math.log2(size))
+        self.pins = ceil(log2(size))
         self.size = size
         self.s = ReversedIndexList([0] * self.pins)
         self.i = ReversedIndexList([0] * self.size)
 
     @property
     def out(self):
-        v = 0
-        for i in range(self.pins):
-            v += self.s[i] * (2**i)
-        return self.i[v]
+        index = sum([self.s[i] * (2**i) for i in range(self.pins)])
+        return self.i[index]
