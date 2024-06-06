@@ -1,13 +1,12 @@
 from cpu.bus import Bus
 from cpu.components.register import Register
 from cpu.memory import Memory
-from cpu.utils.binary import dec_to_binlist, bin_list_value
+from cpu.utils.binary import bin_list_value
 from cpu.components.sc import SequenceCounter
 from cpu.components.decoder import Decoder
 from cpu.components.encoder import Encoder
 from cpu.components.flag import Flags
 from cpu.ALU import ALU
-from cpu.compiler import Compiler
 
 
 # Bus Codes
@@ -193,41 +192,3 @@ class ControlUnit:
             # self.print_registers()
             # self.print_mods()
             # print()
-
-
-# bus = Bus()
-# AR = Register(12, bus)
-# PC = Register(size=12, bus=bus)
-# DR = Register(size=16, bus=bus)
-# IR = Register(size=16, bus=bus, out_range=slice(4, 16))
-# TR = Register(size=16, bus=bus)
-# INPR = Register(size=8, bus=bus)
-# OUTR = Register(size=8, bus=bus)
-# flags = Flags()
-# alu = ALU(DR=DR, AC=None, INPR=INPR, size=16)
-# AC = Register(16, alu)
-# alu.AC = AC
-# memory = Memory(bus=bus, AR=AR)
-# bus.add(None, AR, PC, DR, AC, IR, TR, memory)
-
-# PC.write(dec_to_binlist(1, 12))
-# CU = ControlUnit(
-#     bus=bus,
-#     memory=memory,
-#     alu=alu,
-#     flags=flags,
-#     AR=AR,
-#     AC=AC,
-#     PC=PC,
-#     DR=DR,
-#     IR=IR,
-#     TR=TR,
-#     INPR=INPR,
-#     OUTR=OUTR,
-# )
-
-# INPR.write(dec_to_binlist(14, 8))
-# instructions_str = """
-#     INP
-# """
-
