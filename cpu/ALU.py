@@ -27,10 +27,10 @@ class ALU:
     def update(self):
         self.arithmetic.A = self.DR.out
         self.arithmetic.B = self.AC.out
-        self.logic.A = self.DR.out
-        self.logic.B = self.AC.out
-        self.r_shift.A = self.DR.out
-        self.l_shift.A = self.DR.out
+        self.logic.A = self.AC.out
+        self.logic.B = self.DR.out
+        self.r_shift.A = self.AC.out
+        self.l_shift.A = self.AC.out
         for index, mux in enumerate(self.mux):
             mux.i[0] = self.arithmetic.out[index]
             mux.i[1] = self.logic.out[index]
