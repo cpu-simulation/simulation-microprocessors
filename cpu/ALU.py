@@ -3,7 +3,6 @@ from cpu.components.ALU.logic import Logic
 from cpu.components.ALU.shift import Shift
 from cpu.components.register import Register
 from cpu.components.mux import Mux
-# from math import log2, ceil
 
 
 class ALU:

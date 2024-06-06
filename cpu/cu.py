@@ -155,7 +155,7 @@ class ControlUnit:
                 | (1 - D[1] & T[5]) & self.flags.E
             )
             self.flags.FGI = (1 - p & B[11]) & self.flags.FGI
-            self.flags.FGO = (1 - p & B[11]) & self.flags.FGO
+            self.flags.FGO = (1 - p & B[10]) & self.flags.FGO
             self.flags.IEN = (
                 (1 - R & T[2]) & (1 - p & B[6]) & (p & B[7] | self.flags.IEN)
             )
