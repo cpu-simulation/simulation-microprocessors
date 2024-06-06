@@ -8,8 +8,9 @@ class SequenceCounter:
     def out(self):
         return self.bits
 
-    def clr(self):
-        self.bits = [0] * self.size
+    def clr(self, condition = True):
+        if bool(condition):
+            self.bits = [0] * self.size
 
     def inr(self):
         carry = 1
