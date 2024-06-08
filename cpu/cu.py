@@ -7,17 +7,7 @@ from cpu.components.decoder import Decoder
 from cpu.components.encoder import Encoder
 from cpu.components.flag import Flags
 from cpu.ALU import ALU
-
-
-# Bus Codes
-class BC:
-    AR = 1
-    PC = 2
-    DR = 3
-    AC = 4
-    IR = 5
-    TR = 6
-    RAM = 7
+from cpu.utils.codes import BC, ALUC
 
 
 class ControlUnit:
@@ -118,20 +108,13 @@ class ControlUnit:
 
             self.bus.s = self.encoder.out
 
-            # LDA - Transfer DR to AC
-            self.alu_encoder.i[0] = D[2] & T[5]
-            # ADD
-            self.alu_encoder.i[1] = D[1] & T[5]
-            # AND
-            self.alu_encoder.i[4] = D[0] & T[5]
-            # CMA - Complement Accumumlator
-            self.alu_encoder.i[7] = r & B[9]
-            # shr - Shift accumulator to right
-            self.alu_encoder.i[8] = r & B[7]
-            # shl - Shift accumulator to left
-            self.alu_encoder.i[10] = r & B[6]
-            # INP - Transfer INPR to AC
-            self.alu_encoder.i[12] = p & B[11]
+            self.alu_encoder.i[ALUC.LDA] = D[2] & T[5]
+            self.alu_encoder.i[ALUC.ADD] = D[1] & T[5]
+            self.alu_encoder.i[ALUC.AND] = D[0] & T[5]
+            self.alu_encoder.i[ALUC.CMA] = r & B[9]
+            self.alu_encoder.i[ALUC.SHR] = r & B[7]
+            self.alu_encoder.i[ALUC.SHL] = r & B[6]
+            self.alu_encoder.i[ALUC.INP] = p & B[11]
 
             self.alu.s = self.alu_encoder.out
 
@@ -151,21 +134,20 @@ class ControlUnit:
                 | ((r & B[8]) ^ self.flags.E)
                 | (r & B[7] & self.AC.out[-1])
                 | (r & B[6] & self.AC.out[0])
-                | D[1] & T[5] & self.alu.carry
-                | (1 - D[1] & T[5]) & self.flags.E
+                | (D[1] & T[5] & self.alu.carry)
+                | (1 - (D[1] & T[5])) & self.flags.E
             )
-            self.flags.FGI = (1 - p & B[11]) & self.flags.FGI
-            self.flags.FGO = (1 - p & B[10]) & self.flags.FGO
+            self.flags.FGI = (1 - (p & B[11])) & self.flags.FGI
+            self.flags.FGO = (1 - (p & B[10])) & self.flags.FGO
             self.flags.IEN = (
-                (1 - R & T[2]) & (1 - p & B[6]) & (p & B[7] | self.flags.IEN)
+                (1 - (R & T[2])) & (1 - (p & B[6])) & (p & B[7] | self.flags.IEN)
             )
 
             isz = D[6] & T[6] & int(all(bit == 0 for bit in self.DR.out))
-
-            spa = r & B[4] & self.AC.bits[0]
+            spa = r & B[4] & (1 - self.AC.bits[0])
             sna = r & B[3] & self.AC.bits[0]
             sza = r & B[2] & int(all(bit == 0 for bit in self.AC.out))
-            sze = r & B[1] & self.flags.E
+            sze = r & B[1] & (1 - self.flags.E)
             ski = p & B[9] & self.flags.FGI
             sko = p & B[8] & self.flags.FGO
 
