@@ -18,8 +18,9 @@ class Register:
 
     def load(self, condition=True):
         if bool(condition):
+            bus_output = self.bus.out
             for i in range(-1, -self.size - 1, -1):
-                self.bits[i] = self.bus.out[i]
+                self.bits[i] = bus_output[i]
 
     def inr(self, condition=True):
         if bool(condition):

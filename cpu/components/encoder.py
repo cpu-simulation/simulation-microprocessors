@@ -12,5 +12,5 @@ class Encoder:
     def out(self):
         for j in range(self.size):
             if self.i[j] == 1:
-                return dec_to_binlist(self.size - j, self.out_size)
+                return dec_to_binlist(j, self.out_size)
         return [0] * self.out_size

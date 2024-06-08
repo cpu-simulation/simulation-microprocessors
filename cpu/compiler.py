@@ -38,7 +38,6 @@ class Compiler:
                 )
                 if instruction is None:
                     raise CompileError("syntax", index + 1)
-                print(instruction)
                 instructions.append(dec_to_binlist(instruction, size=16))
             elif len(line) == 3:
                 i = self.i.get(line[0], None)

@@ -44,18 +44,17 @@ class Shift:
         self._A = value
         self.mux[1].i[0] = value[0]
         self.mux[-2].i[1] = value[-1]
-        for i in range(1, self.size - 2):
-            m = self.size - i - 1
-            self.mux[m + 1].i[0] = value[i]
-            self.mux[m - 1].i[1] = value[i]
+        for i in range(1, self.size - 1):
+            self.mux[i + 1].i[0] = value[i]
+            self.mux[i - 1].i[1] = value[i]
 
     @property
     def out(self):
         return [mux.out for mux in self.mux]
 
 
-# shift = Shift(6)
+# shift = Shift(4)
 # shift.i = 0
-# shift.A = [1, 0, 1, 1, 0, 1]
-# shift.s = [1]  # zero for Right, one for left
+# shift.A = [0, 0, 1, 0]
+# shift.s = [0]  # zero for Right, one for left
 # print(shift.out)

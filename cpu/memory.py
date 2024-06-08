@@ -12,7 +12,7 @@ class Memory:
 
     @property
     def out(self):
-        index = sum([self.AR.bits[i] * (2**i) for i in range(len(self.AR.bits))])
+        index = bin_list_value(self.AR.out)
         return self.cells[index].bits
 
     def load(self, condition=True):
