@@ -1,5 +1,5 @@
 from cpu.components.register import Register
-from utils.binary import bin_list_value
+from cpu.utils.binary import bin_list_value
 
 
 class Memory:
@@ -27,11 +27,22 @@ class Memory:
         return self.cells[address].bits
 
     def print(self):
+        memory_info = self.read_bulk()
+        for cell_info in memory_info:
+            address = cell_info["address"]
+            value = cell_info["value"]
+            if int(value, 16) != 0:
+                print(address, value)
+
+
+    def read_bulk(self):
+        data = []
         for i in range(len(self.cells)):
             cell = self.cells[i]
             v = bin_list_value(cell.bits)
-            if sum(cell.bits) != 0:
-                print(hex(i), hex(v))
+            data.append({"address": hex(i), "value": hex(v)})
+
+        return data
 
 
 class Cell:
