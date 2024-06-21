@@ -1,17 +1,19 @@
 import json
 
-from django.http import HttpResponse, HttpResponseServerError, JsonResponse
+from django.http import HttpResponseServerError
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 from ..lazycpu import WorkingCPU
 
-@api_view(['GET'])
+
+@api_view(["GET"])
 def read_register(request):
     data = WorkingCPU.cu.get_registers()
     return Response(data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def write_to_register(request):
     try:
         data: dict[str, str] = json.loads(request.data)
@@ -19,6 +21,8 @@ def write_to_register(request):
         response = Response("OK", 200)
 
     except Exception:
-        response = Response(data='Internal Server Error', exception=HttpResponseServerError, status=500)
+        response = Response(
+            data="Internal Server Error", exception=HttpResponseServerError, status=500
+        )
 
     return response
