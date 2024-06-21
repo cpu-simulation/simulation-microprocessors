@@ -18,7 +18,7 @@ def write_to_memory(request):
         data = request.data
         for cell_info in data:
             address = int(cell_info["address"], 16)
-            value = dec_to_binlist(int(cell_info["value"], 16))
+            value = dec_to_binlist(int(cell_info["value"], 16), WorkingCPU.memory.cell_size)
             WorkingCPU.memory.write(address=address, data=value)
         response = Response("OK", 200)
     except Exception:
