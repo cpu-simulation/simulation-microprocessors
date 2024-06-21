@@ -11,6 +11,7 @@ def compile(request):
         data = request.data
         print(f"{data = }")
         WorkingCPU.compile(data["instructions"])
+        response = Response("OK", 200)
     except Exception as e:
         response = Response(
             data=f"Internal Server ErrEEor:\n{e} ",
