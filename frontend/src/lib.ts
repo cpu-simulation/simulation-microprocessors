@@ -1,9 +1,9 @@
-const api = "http://localhost:3000/api"
+const api = "http://127.0.0.1:8000"
 
 export const loadMemory = async () => {
     try {
-        console.log(`${api}/memory/bulk_read`)
-        const res = await fetch(`${api}/memory/bulk_read`)
+        console.log(`${api}/memory/read`)
+        const res = await fetch(`${api}/memory/read`)
         const memory = await res.json()
         return memory
     } catch (err: any) {
@@ -28,6 +28,9 @@ export const compile = async (instructions_str: string) => {
         const count = instructions.length
         const res = await fetch(`${api}/core/compile`, {
             method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ instructions, count }),
         })
         const data = await res.json()
@@ -40,7 +43,7 @@ export const compile = async (instructions_str: string) => {
 export const excute = async () => {
     try {
         const res = await fetch(`${api}/core/instruction`, {
-            method: "POST",
+            method: "GET",
         })
         const data = await res.json()
         return data

@@ -54,6 +54,18 @@ class ControlUnit:
         t = self.t_decoder.out
         self.sc.inr()
         return t
+    
+    def get_registers(self):
+        return {
+            "PC": hex(bin_list_value(self.PC.out)),
+            "AR": hex(bin_list_value(self.AR.out)),
+            "IR": hex(bin_list_value(self.IR.out)),
+            "DR": hex(bin_list_value(self.DR.out)),
+            "AC": hex(bin_list_value(self.AC.out)),
+            "INPR": hex(bin_list_value(self.INPR.out)),
+            "OUTR": hex(bin_list_value(self.OUTR.out)),
+
+        }
 
     def print_registers(self):
         print(" Registers")
