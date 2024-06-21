@@ -12,5 +12,5 @@ urlpatterns = [
     path("register/read", register.read_register, name="read_register"),
     path("register/write", register.write_to_register, name="write_register"),
     path("core/compile", core.compile, name="compile"),
-    path("core/instructions", core.execute, name="execute"),
+    path("core/instruction", core.execute, name="execute"),
 ]

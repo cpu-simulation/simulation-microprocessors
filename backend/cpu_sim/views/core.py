@@ -1,26 +1,31 @@
 import json
 
-from django.http import HttpResponse, JsonResponse, HttpResponseServerError
+from django.http import HttpResponseServerError
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 from ..lazycpu import WorkingCPU
 
 
+@api_view(["POST"])
 def compile(request):
     try:
-        data: dict[str, list[str]] = json.loads(request.data)
+        data = request.data
+        print(f"{data = }")
         WorkingCPU.compile(data["instructions"])
-        response = HttpResponse("OK", 200)
-    except Exception:
-        response = HttpResponseServerError("Internal Server Error", 500)
+        response = Response(WorkingCPU.memory.read_bulk())
+    except Exception as e:
+        response = Response(data=f'Internal Server ErrEEor:\n{e} ', exception=HttpResponseServerError, status=500)
 
     return response
 
-
+@api_view(['GET'])
 def execute(request):
     try:
         WorkingCPU.execute()
-        response = HttpResponse("OK", 200)
+        response = Response("OK", 200)
 
     except Exception:
-        response = HttpResponseServerError("Internal Server Error", 500)
+        response = Response(data='Internal Server Error', exception=HttpResponseServerError, status=500)
 
     return response
