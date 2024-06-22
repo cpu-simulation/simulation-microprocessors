@@ -27,7 +27,7 @@ class Compiler:
         self.i = {"0": 0x0000, "1": 0x8000}
 
     def compile(self, text):
-        lines = list(map(str.strip, text.strip().split("\n")))
+        lines = text if isinstance(text, list) else list(map(str.strip, text.strip().split("\n")))
         instructions = []
         for index, line in enumerate(lines):
             line = line.split(" ")

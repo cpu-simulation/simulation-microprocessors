@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  transition: 0.4s;
+}
+
+body {
+  margin: 0;
+  font-family: "Lexend Variable";
+  font-weight: 350;
+}
+
+button {
+  outline: none;
+}
+
+html,
+body,
+#theme-provider {
+  @apply min-h-screen;
+}
+
+#theme-provider {
+  display: flex;
+  flex-direction: column;
+  gap: 16px 0;
+  width: 100%;
+  min-height: 100vh;
+  justify-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  #theme-provider {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    width: 100%;
+    min-height: 100vh;
+    justify-items: center;
+  }
+}
+
+.instruction-editor .buttons button {
+  @apply h-10 rounded-3xl pl-4 pr-6 flex items-center justify-center gap-2 text-sm;
+}
+
+.section-header {
+  @apply bg-[--tertiary] text-[--on-tertiary] p-2 text-[18px] text-center rounded-[20px];
+}
+
+.editor {
+  counter-reset: line;
+}
+
+.editor #codeArea {
+  outline: none;
+  padding-left: 50px !important;
+}
+
+.editor pre {
+  padding-left: 50px !important;
+  color: var(--on-background);
+}
+
+.editor .editorLineNumber {
+  position: absolute;
+  left: 0px;
+  color: var(--neutral-50);
+  text-align: right;
+  width: 30px;
+  font-weight: 100;
+}
+
+.alert {
+  transition: 1s;
+  top: 24px;
+  animation: forwards ease-in-out message-opening 0.4s;
+}
+
+@keyframes message-opening {
+  0% {
+    top: -100px;
+  }
+  70% {
+    top: 28px;
+  }
+  100% {
+    top: 20px;
+  }
+}

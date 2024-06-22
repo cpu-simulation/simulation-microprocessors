@@ -84,29 +84,29 @@ class CPU:
         self.cu.run(len(self.instructions))
 
 
-c = CPU()
-instructions_str = """
-    0 LDA 32
-    0 ADD 33
-    0 STA 35
-"""
-c.compile(instructions_str)
+# c = CPU()
+# instructions_str = """
+#     0 LDA 32
+#     0 ADD 33
+#     0 STA 35
+# """
+# c.compile(instructions_str)
 
-print("Instructoins:")
-for i, instruction in enumerate(c.instructions):
-    print(instruction)
-    c.memory.write(instruction, i + 1)
+# print("Instructoins:")
+# for i, instruction in enumerate(c.instructions):
+#     print(instruction)
+#     c.memory.write(instruction, i + 1)
 
-c.memory.write(dec_to_binlist(35, size=16), 50)
-c.memory.write(dec_to_binlist(75, size=16), 51)
-c.memory.write(dec_to_binlist(190, size=16), 52)
+# c.memory.write(dec_to_binlist(35, size=16), 50)
+# c.memory.write(dec_to_binlist(75, size=16), 51)
+# c.memory.write(dec_to_binlist(190, size=16), 52)
 
-print("\nOccupied memory addresses:")
-c.memory.print()
+# print("\nOccupied memory addresses:")
+# c.memory.print()
 
-print()
-c.execute()
-c.cu.print_mods()
-c.cu.print_registers()
-print()
-c.memory.print()
+# print()
+# c.execute()
+# c.cu.print_mods()
+# c.cu.print_registers()
+# print()
+# c.memory.print()
