@@ -36,3 +36,7 @@
   .icon-theme:before {
     content: "\e903";
   }
+
+  .icon-save:before {
+    content: "\e904";
+  }
