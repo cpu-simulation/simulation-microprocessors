@@ -51,3 +51,19 @@ export const excute = async () => {
         throw new Error(err)
     }
 }
+
+export const saveMemory = async (memory: Array<Object>) => {
+    try {
+        const res = await fetch(`${api}/memory/write`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(memory),
+        })
+        const data = await res.json()
+        return data
+    } catch (err: any) {
+        throw new Error(err)
+    }
+}
