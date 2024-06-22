@@ -19,9 +19,9 @@ const Memory = ({ data }: { data: any }) => {
                 {memorySearch === ""
                     ? <>
                         <ListHeader>Code Cells</ListHeader>
-                        <MemoryList list={memoryList.filter(m => Number(m.address) <= 768)} />
+                        <MemoryList list={memoryList.filter(m => Number(m.address) <= 1024)} />
                         <ListHeader>Memory Cells</ListHeader>
-                        <MemoryList list={memoryList.filter(m => Number(m.address) > 768)} />
+                        <MemoryList list={memoryList.filter(m => Number(m.address) > 1024)} />
                     </>
                     : <>
                         <ListHeader>Search Result</ListHeader>
