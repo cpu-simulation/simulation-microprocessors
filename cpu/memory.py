@@ -40,6 +40,8 @@ class Memory:
         for i in range(len(self.cells)):
             cell = self.cells[i]
             v = bin_list_value(cell.bits)
+            if v == 0:
+                continue
             data.append({"address": hex(i), "value": hex(v)})
 
         return data

@@ -54,7 +54,7 @@ class ControlUnit:
         t = self.t_decoder.out
         self.sc.inr()
         return t
-    
+
     def get_registers(self):
         return {
             "PC": hex(bin_list_value(self.PC.out)),
@@ -64,7 +64,6 @@ class ControlUnit:
             "AC": hex(bin_list_value(self.AC.out)),
             "INPR": hex(bin_list_value(self.INPR.out)),
             "OUTR": hex(bin_list_value(self.OUTR.out)),
-
         }
 
     def print_registers(self):
@@ -103,7 +102,7 @@ class ControlUnit:
             r = D[7] & (1 - I) & T[3]
             p = D[7] & I & T[3]
 
-            if bin_list_value(self.PC.out) == num + 2:
+            if bin_list_value(self.PC.out) == num + 1 and T[0]:
                 break
 
             self.encoder.i[BC.PC] = T[0] | D[5] & T[4]

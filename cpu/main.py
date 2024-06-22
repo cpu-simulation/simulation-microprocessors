@@ -74,6 +74,7 @@ class CPU:
         self.INPR.clr()
         self.OUTR.clr()
         self.PC.clr()
+        self.cu.sc.clr()
 
         self.flags.E = 0
         self.flags.FGI = 0
