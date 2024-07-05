@@ -54,9 +54,11 @@ class CPU:
         """
         try:
             instructions = self.compiler.compile(text)
-            self.instructions = instructions
             for i, instruction in enumerate(instructions):
                 self.memory.write(instruction, i + 1)
+            for i in range(len(self.instructions), len(instructions), -1):
+                self.memory.write(dec_to_binlist(0, self.memory.cell_size), i)
+            self.instructions = instructions
         except CompileError as e:
             print(f"Compile Error: {e}")
             return None
