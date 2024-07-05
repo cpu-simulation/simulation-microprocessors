@@ -24,10 +24,13 @@ class Compiler:
         self.storage = storage_lookup_dict
         self.register = register_lookup_dict
         self.io = io_lookup_dict
-        self.i = {"0": 0x0000, "1": 0x8000}
 
     def compile(self, text):
-        lines = text if isinstance(text, list) else list(map(str.strip, text.strip().split("\n")))
+        lines = (
+            text
+            if isinstance(text, list)
+            else list(map(str.strip, text.strip().split("\n")))
+        )
         instructions = []
         for index, line in enumerate(lines):
             line = line.split(" ")
@@ -39,16 +42,19 @@ class Compiler:
                 if instruction is None:
                     raise CompileError("syntax", index + 1)
                 instructions.append(dec_to_binlist(instruction, size=16))
-            elif len(line) == 3:
-                i = self.i.get(line[0], None)
-                if i is None:
-                    raise CompileError("value", index + 1, "i is not valid")
-                opcode = self.storage.get(line[1], None)
+            elif len(line) == 2:
+                i = 0x0000
+                if len(line[0]) == 4:
+                    if line[0][3].upper() == "I":
+                        i = 0x8000
+                    else:
+                        raise CompileError("value", index + 1, "i is not valid")
+                opcode = self.storage.get(line[0][:3], None)
                 if opcode is None:
                     raise CompileError("syntax", index + 1)
                 address = 0
                 try:
-                    address = int(line[2], 16)
+                    address = int(line[1], 16)
                 except ValueError:
                     raise CompileError(
                         "value", index + 1, "invalid value for address"
@@ -61,10 +67,10 @@ class Compiler:
 
 # c = Compiler()
 # instructions_str = """
-#     0 ADD 45A
+#     ADD 45A
 #     CLA
-#     0 LDA 234
-#     1 BSA 135
+#     LDA 234
+#     BSAI 135
 #     SZA
 #     CME
 # """
