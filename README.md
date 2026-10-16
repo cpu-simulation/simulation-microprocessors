@@ -32,9 +32,7 @@ You can step through the textbook's examples without drawing a single timing dia
 
 ## Demo
 
-<a href="docs/assets/demo.mp4">
-  <img alt="Watch the demo (1:17)" src="docs/assets/demo-poster.png">
-</a>
+https://github.com/user-attachments/assets/be0ca027-d3d2-45ef-b4d1-4651d73772db
 
 <sub>A guided 77-second walkthrough: seed memory, write a loop in assembly, compile it, run it, check the result, and switch themes.</sub>
 
