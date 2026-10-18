@@ -10,7 +10,8 @@ enum State {
   idle,
   compiling,
   executing,
-  initialError
+  initialError,
+  loading
 }
 
 enum Editor {
@@ -23,7 +24,7 @@ function App() {
   const [memoryDict, setMemoryDict] = useState<string>("{\n  \n}")
   const [editor, setEditor] = useState(Editor.instruction)
   const [memory, setMemory] = useState<TMemory[]>([])
-  const [state, setState] = useState<State>(State.idle)
+  const [state, setState] = useState<State>(lib.isStatic ? State.loading : State.idle)
   const [message, setMessage] = useState<TMessage | null>()
   const [registers, setRegisters] = useState<TRegisters>({
     "PC": "0x0000",
@@ -84,6 +85,7 @@ function App() {
   useEffect(() => {
     lib.loadMemory().then(setMemory)
       .then(lib.loadRegisters).then(setRegisters)
+      .then(() => setState(State.idle))
       .catch(() => {
         setState(State.initialError)
       })
@@ -98,6 +100,11 @@ function App() {
       ? <div>
         <h1 className="text-3xl">Unexpected Error !</h1>
         <div>Failed to load memory and registers</div>
+      </div>
+      : state == State.loading
+      ? <div>
+        <h1 className="text-3xl">Starting the simulator…</h1>
+        <div>Loading Python in your browser</div>
       </div>
       : <main className="w-full py-4 md:py-1 max-w-[850px] flex flex-col md:grid md:grid-cols-2 gap-y-2 justify-items-center items-center px-2" >
         {message &&
