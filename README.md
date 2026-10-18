@@ -6,6 +6,7 @@
 Write assembly, compile it to machine code, run it, and watch memory and registers change.</p>
 
 <p>
+  <a href="https://cpu-simulation.github.io/simulation-microprocessors/"><b>Live demo</b></a>&nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#getting-started">Getting started</a>&nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#how-it-works">How it works</a>&nbsp;&nbsp;·&nbsp;&nbsp;
   <a href="#instruction-set">Instruction set</a>&nbsp;&nbsp;·&nbsp;&nbsp;
@@ -211,7 +212,12 @@ npm run dev
 ```
 
 Open **http://localhost:5173**. The backend's CORS settings allow that origin, and the frontend reads
-the API address from `frontend/src/lib.ts`.
+the API address from `frontend/src/backend/http.ts`.
+
+**Without the backend.** The [live demo](https://cpu-simulation.github.io/simulation-microprocessors/)
+runs the same `cpu` package inside your browser with [Pyodide](https://pyodide.org), so it needs no server.
+To run that build locally, use `npm run dev:static` in `frontend/`; `npm run build:static` writes the
+site to `frontend/dist-static`.
 
 ### API
 
